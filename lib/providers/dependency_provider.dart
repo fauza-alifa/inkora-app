@@ -1,17 +1,26 @@
-// dependency injections: service & repository that's provided by provider
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:news_app/data/repositories/news_repository.dart';
 import 'package:news_app/data/services/bookmark_storage.dart';
 import 'package:news_app/data/services/news_api_service.dart';
 
-final newsApiServiceProvider = Provider<NewsApiService>(
-  (ref) => NewsApiService(),
-);
+/// Menyediakan NewsApiService.
+final newsApiServiceProvider = Provider<NewsApiService>((ref) {
+  final service = NewsApiService();
 
-final newsRepositoryProvider = Provider<NewsRepository>(
-  (ref) => NewsRepository(ref.watch(newsApiServiceProvider)),
-);
+  ref.onDispose(service.dispose);
 
+  return service;
+});
+
+/// Menyediakan NewsRepository.
+final newsRepositoryProvider = Provider<NewsRepository>((ref) {
+  final apiService = ref.watch(newsApiServiceProvider);
+
+  return NewsRepository(apiService);
+});
+
+/// Menyediakan BookmarkStorage.
 final bookmarkStorageProvider = Provider<BookmarkStorage>(
   (ref) => BookmarkStorage(),
 );
