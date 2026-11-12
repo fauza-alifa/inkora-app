@@ -25,9 +25,9 @@ class DetailHeader extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SourceLabel(name: article.sourceName),
-        const SizedBox(height: 8),
+        SizedBox(height: 8),
         Text(article.title, style: theme.textTheme.headlineSmall),
-        const SizedBox(height: 20),
+        SizedBox(height: 20),
         Row(
           children: [
             CircleAvatar(
@@ -41,7 +41,7 @@ class DetailHeader extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: 12),
+            SizedBox(width: 12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

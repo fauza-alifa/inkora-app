@@ -19,7 +19,7 @@ class BookmarkItem extends ConsumerWidget {
       ..hideCurrentSnackBar()
       ..showSnackBar(
         SnackBar(
-          content: const Text('Dihapus dari Tersimpan'),
+          content: Text('Dihapus dari Tersimpan'),
           action: SnackBarAction(
             label: 'Urungkan',
             onPressed: () {
@@ -42,7 +42,7 @@ class BookmarkItem extends ConsumerWidget {
       background: Container(
         color: scheme.errorContainer,
         alignment: Alignment.centerRight,
-        padding: const EdgeInsets.symmetric(horizontal: 24),
+        padding: EdgeInsets.symmetric(horizontal: 24),
         child: Icon(
           Icons.delete_outline_rounded,
           color: scheme.onErrorContainer,

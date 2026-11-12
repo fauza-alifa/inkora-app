@@ -24,7 +24,7 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return RefreshIndicator(
       onRefresh: () => _refresh(ref),
-      child: const CustomScrollView(
+      child: CustomScrollView(
         slivers: [
           HomeAppBar(),
           SliverToBoxAdapter(child: CategoryChips()),

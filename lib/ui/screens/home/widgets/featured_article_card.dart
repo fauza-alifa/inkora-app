@@ -25,7 +25,7 @@ class FeaturedArticleCard extends StatelessWidget {
       child: InkWell(
         onTap: () => AppRouter.openArticle(context, article),
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+          padding: EdgeInsets.fromLTRB(16, 12, 16, 12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -35,7 +35,7 @@ class FeaturedArticleCard extends StatelessWidget {
                 child: ArticleImage(url: article.imageUrl, radius: 16),
               ),
 
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
 
               // Source and bookmark
               Row(
@@ -46,7 +46,7 @@ class FeaturedArticleCard extends StatelessWidget {
                 ],
               ),
 
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
 
               // Article title
               Text(
@@ -62,7 +62,7 @@ class FeaturedArticleCard extends StatelessWidget {
 
               // Article description
               if (description != null && description.trim().isNotEmpty) ...[
-                const SizedBox(height: 10),
+                SizedBox(height: 10),
                 Text(
                   description,
                   maxLines: 3,
@@ -74,7 +74,7 @@ class FeaturedArticleCard extends StatelessWidget {
                 ),
               ],
 
-              const SizedBox(height: 14),
+              SizedBox(height: 14),
 
               // Publication date
               Row(
@@ -84,7 +84,7 @@ class FeaturedArticleCard extends StatelessWidget {
                     size: 14,
                     color: colors.onSurfaceVariant,
                   ),
-                  const SizedBox(width: 6),
+                  SizedBox(width: 6),
                   Expanded(
                     child: Text(
                       DateFormatter.relative(article.publishedAt),
@@ -102,7 +102,7 @@ class FeaturedArticleCard extends StatelessWidget {
                       letterSpacing: 0.8,
                     ),
                   ),
-                  const SizedBox(width: 4),
+                  SizedBox(width: 4),
                   Icon(
                     Icons.arrow_forward_rounded,
                     size: 14,

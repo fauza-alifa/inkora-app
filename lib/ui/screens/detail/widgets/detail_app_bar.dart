@@ -17,19 +17,19 @@ class DetailAppBar extends StatelessWidget {
       stretch: true,
       expandedHeight: 300,
       leading: Padding(
-        padding: const EdgeInsets.all(6),
+        padding: EdgeInsets.all(6),
         child: IconButton.filledTonal(
           tooltip: 'Kembali',
-          icon: const Icon(Icons.arrow_back_rounded),
+          icon: Icon(Icons.arrow_back_rounded),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
       actions: [
         BookmarkButton(article: article, tonal: true),
-        const SizedBox(width: 8),
+        SizedBox(width: 8),
       ],
       flexibleSpace: FlexibleSpaceBar(
-        stretchModes: const [StretchMode.zoomBackground],
+        stretchModes: [StretchMode.zoomBackground],
         background: ArticleImage(url: article.imageUrl, radius: 0),
       ),
     );

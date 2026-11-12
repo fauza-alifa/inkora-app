@@ -23,7 +23,7 @@ class ArchiveArticleList extends StatelessWidget {
     final colors = theme.colorScheme;
 
     if (isLoading) {
-      return const Padding(
+      return Padding(
         padding: EdgeInsets.symmetric(vertical: 40),
         child: Center(child: CircularProgressIndicator()),
       );
@@ -59,7 +59,7 @@ class ArchiveArticleList extends StatelessWidget {
 
   Widget _buildEmptyState(ThemeData theme, ColorScheme colors) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
+      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 40),
       child: Column(
         children: [
           Icon(
@@ -67,14 +67,14 @@ class ArchiveArticleList extends StatelessWidget {
             size: 48,
             color: colors.onSurfaceVariant.withValues(alpha: 0.6),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Text(
             'Belum ada berita',
             style: theme.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.w700,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Text(
             'Tidak ditemukan berita pada tanggal ini. '
             'Coba pilih tanggal lainnya.',
@@ -90,18 +90,18 @@ class ArchiveArticleList extends StatelessWidget {
 
   Widget _buildErrorState(ThemeData theme, ColorScheme colors) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
+      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 40),
       child: Column(
         children: [
           Icon(Icons.error_outline, size: 48, color: colors.error),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Text(
             'Gagal memuat berita',
             style: theme.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.w700,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Text(
             errorMessage!,
             textAlign: TextAlign.center,
@@ -110,11 +110,11 @@ class ArchiveArticleList extends StatelessWidget {
             ),
           ),
           if (onRetry != null) ...[
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             OutlinedButton.icon(
               onPressed: onRetry,
-              icon: const Icon(Icons.refresh_rounded),
-              label: const Text('Coba lagi'),
+              icon: Icon(Icons.refresh_rounded),
+              label: Text('Coba lagi'),
             ),
           ],
         ],

@@ -11,11 +11,11 @@ class ReadMoreBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      minimum: const EdgeInsets.fromLTRB(20, 8, 20, 16),
+      minimum: EdgeInsets.fromLTRB(20, 8, 20, 16),
       child: FilledButton.icon(
-        style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(52)),
-        icon: const Icon(Icons.open_in_new_rounded),
-        label: const Text('Baca artikel lengkap'),
+        style: FilledButton.styleFrom(minimumSize: Size.fromHeight(52)),
+        icon: Icon(Icons.open_in_new_rounded),
+        label: Text('Baca artikel lengkap'),
         onPressed: () => UrlHelper.open(context, url),
       ),
     );

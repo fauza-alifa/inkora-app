@@ -30,7 +30,7 @@ class ArticleImage extends StatelessWidget {
               width: width,
               height: height,
               fit: BoxFit.cover,
-              fadeInDuration: const Duration(milliseconds: 250),
+              fadeInDuration: Duration(milliseconds: 250),
               placeholder: (_, _) => placeholder,
               errorWidget: (_, _, _) => placeholder,
             ),
@@ -39,7 +39,7 @@ class ArticleImage extends StatelessWidget {
 }
 
 class _Placeholder extends StatelessWidget {
-  const _Placeholder({this.width, this.height});
+  _Placeholder({this.width, this.height});
 
   final double? width;
   final double? height;

@@ -47,8 +47,8 @@ class AppNavigationBar extends ConsumerWidget {
         border: Border(
           top: BorderSide(
             color: scheme.brightness == Brightness.dark
-                ? const Color(0xFF293746)
-                : const Color(0xFFE5E7EB),
+                ? Color(0xFF293746)
+                : Color(0xFFE5E7EB),
           ),
         ),
       ),
@@ -80,7 +80,7 @@ class AppNavigationBar extends ConsumerWidget {
                       ),
                     ),
 
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4),
 
                     // Label navigasi.
                     Text(
@@ -95,11 +95,11 @@ class AppNavigationBar extends ConsumerWidget {
                       ),
                     ),
 
-                    const SizedBox(height: 5),
+                    SizedBox(height: 5),
 
                     // Indikator aktif di bawah label.
                     AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
+                      duration: Duration(milliseconds: 200),
                       curve: Curves.easeInOut,
                       width: isSelected ? 24 : 0,
                       height: 3,

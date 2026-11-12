@@ -20,11 +20,11 @@ class BookmarksScreen extends ConsumerWidget {
       slivers: [
         SliverAppBar(
           title: Text('Tersimpan', style: textTheme.headlineMedium),
-          actions: const [ThemeToggleButton(), SizedBox(width: 8)],
+          actions: [ThemeToggleButton(), SizedBox(width: 8)],
         ),
 
         if (bookmarks.isEmpty)
-          const SliverFillRemaining(
+          SliverFillRemaining(
             hasScrollBody: false,
             child: EmptyState(
               icon: Icons.bookmark_border_rounded,
@@ -37,7 +37,7 @@ class BookmarksScreen extends ConsumerWidget {
           SliverList.separated(
             itemCount: bookmarks.length,
             separatorBuilder: (_, _) =>
-                const Divider(indent: 16, endIndent: 16),
+                Divider(indent: 16, endIndent: 16),
             itemBuilder: (_, index) => BookmarkItem(article: bookmarks[index]),
           ),
       ],

@@ -21,7 +21,7 @@ class ArchiveCalendar extends StatefulWidget {
 class _ArchiveCalendarState extends State<ArchiveCalendar> {
   late DateTime _displayedMonth;
 
-  static const List<String> _weekdays = [
+  static List<String> _weekdays = [
     'Sen',
     'Sel',
     'Rab',
@@ -123,7 +123,7 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
     final totalCells = ((startingOffset + daysInMonth + 6) ~/ 7) * 7;
 
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: calendarBackground,
         borderRadius: BorderRadius.circular(20),
@@ -136,7 +136,7 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
       child: Column(
         children: [
           _buildMonthHeader(theme, textColor),
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
 
           Row(
             children: _weekdays.map((day) {
@@ -154,13 +154,13 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
             }).toList(),
           ),
 
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
 
           GridView.builder(
             shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
+            physics: NeverScrollableScrollPhysics(),
             itemCount: totalCells,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 7,
               mainAxisSpacing: 8,
               crossAxisSpacing: 4,
@@ -169,7 +169,7 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
               final dayNumber = index - startingOffset + 1;
 
               if (dayNumber < 1 || dayNumber > daysInMonth) {
-                return const SizedBox.shrink();
+                return SizedBox.shrink();
               }
 
               final date = DateTime(
@@ -197,7 +197,7 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
             },
           ),
 
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
 
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -205,19 +205,19 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
               Container(
                 width: 8,
                 height: 8,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: AppTheme.primaryOrange,
                   shape: BoxShape.circle,
                 ),
               ),
-              const SizedBox(width: 6),
+              SizedBox(width: 6),
               Text(
                 'Tanggal dipilih',
                 style: theme.textTheme.labelSmall?.copyWith(
                   color: secondaryTextColor,
                 ),
               ),
-              const SizedBox(width: 16),
+              SizedBox(width: 16),
               Container(
                 width: 8,
                 height: 8,
@@ -226,7 +226,7 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
                   shape: BoxShape.circle,
                 ),
               ),
-              const SizedBox(width: 6),
+              SizedBox(width: 6),
               Text(
                 'Hari ini',
                 style: theme.textTheme.labelSmall?.copyWith(
@@ -292,11 +292,11 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
       color: backgroundColor,
       shape: CircleBorder(
         side: isToday && !isSelected
-            ? const BorderSide(color: AppTheme.primaryOrange, width: 1.5)
+            ? BorderSide(color: AppTheme.primaryOrange, width: 1.5)
             : BorderSide.none,
       ),
       child: InkWell(
-        customBorder: const CircleBorder(),
+        customBorder: CircleBorder(),
         onTap: isDisabled ? null : () => _selectDate(date),
         child: Center(
           child: Text(

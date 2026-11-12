@@ -17,15 +17,15 @@ class SearchScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(16, 20, 16, 12),
+            padding: EdgeInsets.fromLTRB(16, 20, 16, 12),
             child: Text('Jelajahi', style: textTheme.headlineMedium),
           ),
-          const Padding(
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: SearchInput(),
           ),
-          const SizedBox(height: 8),
-          const Expanded(child: SearchResults()),
+          SizedBox(height: 8),
+          Expanded(child: SearchResults()),
         ],
       ),
     );

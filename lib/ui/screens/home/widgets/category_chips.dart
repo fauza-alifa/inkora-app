@@ -22,9 +22,9 @@ class CategoryChips extends ConsumerWidget {
       height: 52,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsets.symmetric(horizontal: 16),
         itemCount: categories.length,
-        separatorBuilder: (_, _) => const SizedBox(width: 24),
+        separatorBuilder: (_, _) => SizedBox(width: 24),
         itemBuilder: (context, index) {
           final category = categories[index];
           final isSelected = category == selected;
@@ -34,7 +34,7 @@ class CategoryChips extends ConsumerWidget {
               ref.read(selectedCategoryProvider.notifier).select(category);
             },
             child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
+              duration: Duration(milliseconds: 200),
               decoration: BoxDecoration(
                 border: Border(
                   bottom: BorderSide(

@@ -20,7 +20,7 @@ class ArticleTile extends StatelessWidget {
     return InkWell(
       onTap: () => AppRouter.openArticle(context, article),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 14, 16, 14),
+        padding: EdgeInsets.fromLTRB(16, 14, 16, 14),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -29,14 +29,14 @@ class ArticleTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SourceLabel(name: article.sourceName),
-                  const SizedBox(height: 6),
+                  SizedBox(height: 6),
                   Text(
                     article.title,
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                     style: theme.textTheme.titleMedium,
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Row(
                     children: [
                       Text(
@@ -45,14 +45,14 @@ class ArticleTile extends StatelessWidget {
                           color: theme.colorScheme.onSurfaceVariant,
                         ),
                       ),
-                      const Spacer(),
+                      Spacer(),
                       BookmarkButton(article: article),
                     ],
                   ),
                 ],
               ),
             ),
-            const SizedBox(width: 16),
+            SizedBox(width: 16),
             ArticleImage(url: article.imageUrl, width: 92, height: 92),
           ],
         ),

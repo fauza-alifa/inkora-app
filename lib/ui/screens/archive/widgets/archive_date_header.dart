@@ -22,7 +22,7 @@ class ArchiveDateHeader extends StatelessWidget {
     ).format(selectedDate);
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(4, 24, 4, 12),
+      padding: EdgeInsets.fromLTRB(4, 24, 4, 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -32,7 +32,7 @@ class ArchiveDateHeader extends StatelessWidget {
               fontWeight: FontWeight.w800,
             ),
           ),
-          const SizedBox(height: 6),
+          SizedBox(height: 6),
           Row(
             children: [
               Icon(
@@ -40,7 +40,7 @@ class ArchiveDateHeader extends StatelessWidget {
                 size: 15,
                 color: colors.primary,
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Expanded(
                 child: Text(
                   formattedDate,
@@ -52,7 +52,7 @@ class ArchiveDateHeader extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           Text(
             '$articleCount berita ditemukan',
             style: theme.textTheme.bodySmall?.copyWith(

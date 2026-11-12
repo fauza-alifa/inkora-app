@@ -16,7 +16,7 @@ class SearchResults extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // Gunakan ref.watch(searchQueryProvider)
     final query = ref.watch(searchQueryProvider);
-    if (query.isEmpty) return const SearchSuggestions();
+    if (query.isEmpty) return SearchSuggestions();
 
     // Gunakan ref.watch(searchResultsProvider)
     final SearchResults = ref.watch(searchResultsProvider);

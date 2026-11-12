@@ -30,15 +30,15 @@ class DetailContent extends StatelessWidget {
             ),
           ),
         if (content.isNotEmpty && content != description) ...[
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Text(content, style: theme.textTheme.bodyLarge),
         ],
-        const SizedBox(height: 24),
+        SizedBox(height: 24),
         Card.filled(
           color: scheme.surfaceContainerHigh,
           margin: EdgeInsets.zero,
           child: ListTile(
-            contentPadding: const EdgeInsets.symmetric(
+            contentPadding: EdgeInsets.symmetric(
               horizontal: 16,
               vertical: 4,
             ),

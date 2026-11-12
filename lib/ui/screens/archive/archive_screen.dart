@@ -19,15 +19,15 @@ class ArchiveScreen extends ConsumerWidget {
     );
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Arsip Berita'), centerTitle: false),
+      appBar: AppBar(title: Text('Arsip Berita'), centerTitle: false),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.only(bottom: 24),
+          padding: EdgeInsets.only(bottom: 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+                padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
                 child: ArchiveCalendar(
                   selectedDate: selectedDate,
                   onDateSelected: (date) {
@@ -38,10 +38,10 @@ class ArchiveScreen extends ConsumerWidget {
                 ),
               ),
 
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
 
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: EdgeInsets.symmetric(horizontal: 16),
                 child: archiveArticlesAsync.when(
                   loading: () => ArchiveDateHeader(
                     selectedDate: selectedDate,
@@ -58,13 +58,13 @@ class ArchiveScreen extends ConsumerWidget {
                 ),
               ),
 
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
 
               archiveArticlesAsync.when(
                 loading: () =>
-                    const ArchiveArticleList(articles: [], isLoading: true),
+                    ArchiveArticleList(articles: [], isLoading: true),
                 error: (error, stackTrace) => ArchiveArticleList(
-                  articles: const [],
+                  articles: [],
                   errorMessage:
                       'Terjadi kesalahan saat memuat berita. '
                       'Periksa koneksi internet dan coba lagi.',

@@ -19,11 +19,11 @@ class ArticleDetailScreen extends StatelessWidget {
         slivers: [
           DetailAppBar(article: article),
           SliverPadding(
-            padding: const EdgeInsets.fromLTRB(20, 24, 20, 32),
+            padding: EdgeInsets.fromLTRB(20, 24, 20, 32),
             sliver: SliverList.list(
               children: [
                 DetailHeader(article: article),
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
                 DetailContent(article: article),
               ],
             ),

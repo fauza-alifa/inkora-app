@@ -47,7 +47,7 @@ class HomeAppBar extends ConsumerWidget {
               },
             ),
           ),
-          const SizedBox(width: 10),
+          SizedBox(width: 10),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,7 +59,7 @@ class HomeAppBar extends ConsumerWidget {
                     color: colors.onSurfaceVariant,
                   ),
                 ),
-                const SizedBox(height: 2),
+                SizedBox(height: 2),
                 Text(
                   'Inkora',
                   style: theme.textTheme.headlineMedium?.copyWith(
@@ -74,22 +74,22 @@ class HomeAppBar extends ConsumerWidget {
       actions: [
         IconButton(
           tooltip: 'Arsip berita',
-          icon: const Icon(Icons.calendar_month_rounded),
+          icon: Icon(Icons.calendar_month_rounded),
           onPressed: () {
             Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const ArchiveScreen()),
+              MaterialPageRoute(builder: (context) => ArchiveScreen()),
             );
           },
         ),
-        const ThemeToggleButton(),
+        ThemeToggleButton(),
         IconButton(
           tooltip: 'Cari berita',
-          icon: const Icon(Icons.search_rounded),
+          icon: Icon(Icons.search_rounded),
           onPressed: () {
             ref.read(navigationProvider.notifier).select(1);
           },
         ),
-        const SizedBox(width: 8),
+        SizedBox(width: 8),
       ],
     );
   }

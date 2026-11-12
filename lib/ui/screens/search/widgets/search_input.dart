@@ -47,10 +47,10 @@ class _SearchInputState extends ConsumerState<SearchInput> {
         TextStyle(color: scheme.onSurfaceVariant),
       ),
       textStyle: WidgetStatePropertyAll(TextStyle(color: scheme.onSurface)),
-      elevation: const WidgetStatePropertyAll(0),
+      elevation: WidgetStatePropertyAll(0),
       backgroundColor: WidgetStatePropertyAll(scheme.surfaceContainer),
-      shape: WidgetStatePropertyAll(const StadiumBorder()),
-      padding: const WidgetStatePropertyAll(
+      shape: WidgetStatePropertyAll(StadiumBorder()),
+      padding: WidgetStatePropertyAll(
         EdgeInsets.symmetric(horizontal: 20),
       ),
       leading: Icon(Icons.search_rounded, color: scheme.onSurfaceVariant),
@@ -63,13 +63,13 @@ class _SearchInputState extends ConsumerState<SearchInput> {
           listenable: _controller,
           builder: (_, _) {
             if (_controller.text.isEmpty) {
-              return const SizedBox.shrink();
+              return SizedBox.shrink();
             }
 
             return IconButton(
               tooltip: 'Hapus pencarian',
               onPressed: _clear,
-              icon: const Icon(Icons.close_rounded),
+              icon: Icon(Icons.close_rounded),
             );
           },
         ),

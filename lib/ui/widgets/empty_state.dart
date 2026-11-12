@@ -24,7 +24,7 @@ class EmptyState extends StatelessWidget {
 
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(32),
+        padding: EdgeInsets.all(32),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -33,9 +33,9 @@ class EmptyState extends StatelessWidget {
               backgroundColor: scheme.secondaryContainer,
               child: Icon(icon, size: 32, color: scheme.onSecondaryContainer),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             Text(title, style: theme.textTheme.titleMedium),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               message,
               textAlign: TextAlign.center,
@@ -44,7 +44,7 @@ class EmptyState extends StatelessWidget {
               ),
             ),
             if (actionLabel != null && onAction != null) ...[
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               FilledButton.tonal(
                 onPressed: onAction,
                 child: Text(actionLabel!),

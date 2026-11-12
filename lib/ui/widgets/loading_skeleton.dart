@@ -14,7 +14,7 @@ class _LoadingSkeletonState extends State<LoadingSkeleton>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller = AnimationController(
     vsync: this,
-    duration: const Duration(milliseconds: 900),
+    duration: Duration(milliseconds: 900),
   )..repeat(reverse: true);
 
   @override
@@ -41,14 +41,14 @@ class _LoadingSkeletonState extends State<LoadingSkeleton>
 }
 
 class _SkeletonTile extends StatelessWidget {
-  const _SkeletonTile({required this.animationValue});
+  _SkeletonTile({required this.animationValue});
 
   final double animationValue;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       child: Row(
         children: [
           Expanded(
@@ -56,14 +56,14 @@ class _SkeletonTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _Bar(width: 80, height: 10, animationValue: animationValue),
-                const SizedBox(height: 10),
+                SizedBox(height: 10),
                 _Bar(height: 14, animationValue: animationValue),
-                const SizedBox(height: 6),
+                SizedBox(height: 6),
                 _Bar(width: 180, height: 14, animationValue: animationValue),
               ],
             ),
           ),
-          const SizedBox(width: 16),
+          SizedBox(width: 16),
           _Bar(
             width: 92,
             height: 92,
@@ -77,7 +77,7 @@ class _SkeletonTile extends StatelessWidget {
 }
 
 class _Bar extends StatelessWidget {
-  const _Bar({
+  _Bar({
     this.width = double.infinity,
     required this.height,
     this.radius = 6,
@@ -96,7 +96,7 @@ class _Bar extends StatelessWidget {
 
     // Transisi warna solid tanpa menggunakan opacity/transparansi
     final color1 = scheme.surfaceContainerHighest;
-    final color2 = isDark ? const Color(0xFF38495D) : const Color(0xFFD6DFEC);
+    final color2 = isDark ? Color(0xFF38495D) : Color(0xFFD6DFEC);
     final solidColor = Color.lerp(color1, color2, animationValue)!;
 
     return Container(

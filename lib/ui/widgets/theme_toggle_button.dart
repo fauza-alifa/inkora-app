@@ -18,7 +18,7 @@ class ThemeToggleButton extends ConsumerWidget {
         ref.read(themeModeProvider.notifier).toggle(brightness);
       },
       icon: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 300),
+        duration: Duration(milliseconds: 300),
         transitionBuilder: (child, animation) {
           // Menggunakan ScaleTransition & RotationTransition solid tanpa opacity
           return ScaleTransition(
