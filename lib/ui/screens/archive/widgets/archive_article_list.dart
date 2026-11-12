@@ -93,7 +93,7 @@ class ArchiveArticleList extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
       child: Column(
         children: [
-          Icon(Icons.cloud_off_outlined, size: 48, color: colors.error),
+          Icon(Icons.error_outline, size: 48, color: colors.error),
           const SizedBox(height: 16),
           Text(
             'Gagal memuat berita',
