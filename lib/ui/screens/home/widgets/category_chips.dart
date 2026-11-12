@@ -4,7 +4,7 @@ import 'package:news_app/providers/headlines_provider.dart';
 
 import '../../../../core/constants/news_category.dart';
 
-/// TODO: Ubah CategoryChips menjadi ConsumerWidget saat Riverpod ditambahkan
+/// Pilihan kategori berita berbentuk chip horizontal (ConsumerWidget).
 class CategoryChips extends ConsumerWidget {
   const CategoryChips({super.key});
 
@@ -26,7 +26,8 @@ class CategoryChips extends ConsumerWidget {
             label: Text(category.label),
             selected: category == selected,
             showCheckmark: false,
-            onSelected: (_) => ref.read(selectedCategoryProvider.notifier).select(category),
+            onSelected: (_) =>
+                ref.read(selectedCategoryProvider.notifier).select(category),
           );
         },
       ),

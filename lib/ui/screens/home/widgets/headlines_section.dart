@@ -8,8 +8,7 @@ import 'package:news_app/ui/widgets/loading_skeleton.dart';
 import '../../../widgets/article_tile.dart';
 import 'featured_article_card.dart';
 
-/// TODO: Ubah HeadlinesSection menjadi ConsumerWidget
-/// TODO: Gunakan AsyncValue.when dari headlinesProvider
+/// Bagian daftar berita utama dengan penanganan state asynchronous.
 class HeadlinesSection extends ConsumerWidget {
   const HeadlinesSection({super.key});
 
@@ -34,7 +33,7 @@ class HeadlinesSection extends ConsumerWidget {
             child: EmptyState(
               icon: Icons.newspaper_rounded,
               title: 'Belum ada Berita',
-              message: 'Coba pilih kategori laain atau tarik untuk refresh',
+              message: 'Coba pilih kategori lain atau tarik untuk refresh',
             ),
           );
         }

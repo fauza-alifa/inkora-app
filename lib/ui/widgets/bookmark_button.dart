@@ -4,7 +4,7 @@ import 'package:news_app/providers/bookmark_provider.dart';
 
 import '../../data/models/article.dart';
 
-/// TODO: Ubah BookmarkButton menjadi ConsumerWidget
+/// Tombol bookmark untuk menyimpan/menghapus artikel.
 class BookmarkButton extends ConsumerWidget {
   const BookmarkButton({super.key, required this.article, this.tonal = false});
 
@@ -38,6 +38,7 @@ class BookmarkButton extends ConsumerWidget {
         onPressed: onPressed,
       );
     }
+    
     return IconButton(
       tooltip: tooltip,
       visualDensity: VisualDensity.compact,

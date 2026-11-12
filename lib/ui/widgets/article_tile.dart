@@ -20,7 +20,7 @@ class ArticleTile extends StatelessWidget {
     return InkWell(
       onTap: () => AppRouter.openArticle(context, article),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 14, 16, 6),
+        padding: const EdgeInsets.fromLTRB(16, 14, 16, 14),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -36,6 +36,7 @@ class ArticleTile extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: theme.textTheme.titleMedium,
                   ),
+                  const SizedBox(height: 8),
                   Row(
                     children: [
                       Text(

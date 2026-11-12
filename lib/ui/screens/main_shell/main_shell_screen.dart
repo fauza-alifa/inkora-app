@@ -7,7 +7,7 @@ import '../home/home_screen.dart';
 import '../search/search_screen.dart';
 import 'widgets/app_navigation_bar.dart';
 
-/// TODO: Ubah MainShellScreen menjadi ConsumerWidget saat Riverpod diimplementasikan
+/// Layout cangkang utama (Shell) yang menampung navigasi tab dan IndexedStack.
 class MainShellScreen extends ConsumerWidget {
   const MainShellScreen({super.key});
 

@@ -5,14 +5,16 @@ import 'package:news_app/providers/bookmark_provider.dart';
 import '../../../../data/models/article.dart';
 import '../../../widgets/article_tile.dart';
 
-/// TODO: Ubah BookmarkItem menjadi ConsumerWidget
+/// Item bookmark dengan fitur geser (Dismissible) untuk menghapus artikel.
 class BookmarkItem extends ConsumerWidget {
   const BookmarkItem({super.key, required this.article});
 
   final Article article;
 
   void _remove(BuildContext context, WidgetRef ref) {
-    // TODO: Panggil ref.read(bookmarksProvider.notifier).toggle(article)
+    // Panggil ref.read(bookmarksProvider.notifier).toggle(article) untuk menghapus
+    ref.read(bookmarksProvider.notifier).toggle(article);
+
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(
@@ -21,7 +23,7 @@ class BookmarkItem extends ConsumerWidget {
           action: SnackBarAction(
             label: 'Urungkan',
             onPressed: () {
-              // TODO: Panggil notifier.toggle(article) lagi
+              // Panggil notifier.toggle(article) lagi untuk mengembalikan
               ref.read(bookmarksProvider.notifier).toggle(article);
             },
           ),

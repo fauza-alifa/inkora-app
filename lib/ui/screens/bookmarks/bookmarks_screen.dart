@@ -6,21 +6,23 @@ import '../../widgets/empty_state.dart';
 import '../../widgets/theme_toggle_button.dart';
 import 'widgets/bookmark_item.dart';
 
-/// TODO: Ubah BookmarksScreen menjadi ConsumerWidget
+/// Halaman untuk menampilkan daftar artikel yang disimpan (Bookmarks).
 class BookmarksScreen extends ConsumerWidget {
   const BookmarksScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Take bookmark list from provider
+    // Ambil daftar bookmark dari provider
     final bookmarks = ref.watch(bookmarksProvider);
+    final textTheme = Theme.of(context).textTheme;
 
     return CustomScrollView(
       slivers: [
-        const SliverAppBar.large(
-          title: Text('Tersimpan'),
-          actions: [ThemeToggleButton(), SizedBox(width: 8)],
+        SliverAppBar(
+          title: Text('Tersimpan', style: textTheme.headlineMedium),
+          actions: const [ThemeToggleButton(), SizedBox(width: 8)],
         ),
+
         if (bookmarks.isEmpty)
           const SliverFillRemaining(
             hasScrollBody: false,
