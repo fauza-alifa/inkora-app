@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_app/providers/search_provider.dart';
 
-/// TODO: Ubah SearchInput menjadi ConsumerStatefulWidget
 class SearchInput extends ConsumerStatefulWidget {
   const SearchInput({super.key});
 
@@ -12,6 +11,12 @@ class SearchInput extends ConsumerStatefulWidget {
 
 class _SearchInputState extends ConsumerState<SearchInput> {
   final _controller = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.text = ref.read(searchQueryProvider);
+  }
 
   @override
   void dispose() {
@@ -26,39 +31,47 @@ class _SearchInputState extends ConsumerState<SearchInput> {
 
   @override
   Widget build(BuildContext context) {
-    // Dengarkan perubahan searchQueryProvider dari luar (example: when click topic recommendation)
-    ref.listen(searchQueryProvider, (_, next) {
-      if (_controller.text != next) _controller.text = next;
-      _controller.selection = TextSelection.fromPosition(
-        TextPosition(offset: _controller.text.length),
-      );
-    });
     final scheme = Theme.of(context).colorScheme;
+
+    ref.listen(searchQueryProvider, (_, next) {
+      if (_controller.text != next) {
+        _controller.text = next;
+        _controller.selection = TextSelection.collapsed(offset: next.length);
+      }
+    });
 
     return SearchBar(
       controller: _controller,
-      hintText: 'Cari berita, topik, atau tokoh',
-      elevation: const WidgetStatePropertyAll(0),
-      backgroundColor: WidgetStatePropertyAll(scheme.surfaceContainerHigh),
-      padding: const WidgetStatePropertyAll(
-        EdgeInsets.symmetric(horizontal: 16),
+      hintText: 'Cari sesuatu...',
+      hintStyle: WidgetStatePropertyAll(
+        TextStyle(color: scheme.onSurfaceVariant),
       ),
-      leading: const Icon(Icons.search_rounded),
+      textStyle: WidgetStatePropertyAll(TextStyle(color: scheme.onSurface)),
+      elevation: const WidgetStatePropertyAll(0),
+      backgroundColor: WidgetStatePropertyAll(scheme.surfaceContainer),
+      shape: WidgetStatePropertyAll(const StadiumBorder()),
+      padding: const WidgetStatePropertyAll(
+        EdgeInsets.symmetric(horizontal: 20),
+      ),
+      leading: Icon(Icons.search_rounded, color: scheme.onSurfaceVariant),
       textInputAction: TextInputAction.search,
       onSubmitted: (value) {
-        // Simpan value ke searchQueryProvider
         ref.read(searchQueryProvider.notifier).submit(value);
       },
       trailing: [
         ListenableBuilder(
           listenable: _controller,
-          builder: (_, _) => _controller.text.isEmpty
-              ? const SizedBox.shrink()
-              : IconButton(
-                  tooltip: 'Hapus',
-                  icon: const Icon(Icons.close_rounded),
-                  onPressed: _clear,
-                ),
+          builder: (_, _) {
+            if (_controller.text.isEmpty) {
+              return const SizedBox.shrink();
+            }
+
+            return IconButton(
+              tooltip: 'Hapus pencarian',
+              onPressed: _clear,
+              icon: const Icon(Icons.close_rounded),
+            );
+          },
         ),
       ],
     );

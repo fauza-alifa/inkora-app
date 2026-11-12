@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/theme/app_theme.dart';
 
 import '../../../../core/utils/date_formatter.dart';
 import '../../../../data/models/article.dart';
@@ -18,6 +19,7 @@ class DetailHeader extends StatelessWidget {
     final byline = author == null || author.isEmpty
         ? article.sourceName
         : author;
+    final isDark = theme.brightness == Brightness.dark;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,10 +32,13 @@ class DetailHeader extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 20,
-              backgroundColor: scheme.primaryContainer,
+              backgroundColor: AppTheme.primaryOrange,
               child: Text(
-                byline.characters.first.toUpperCase(),
-                style: TextStyle(color: scheme.onPrimaryContainer),
+                byline.isNotEmpty ? byline.characters.first.toUpperCase() : '?',
+                style: TextStyle(
+                  color: isDark ? AppTheme.inkoraBlue : Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             const SizedBox(width: 12),
