@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:news_app/core/theme/app_theme.dart';
 
 class ArchiveCalendar extends StatefulWidget {
   const ArchiveCalendar({
@@ -33,7 +34,6 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
   @override
   void initState() {
     super.initState();
-
     _displayedMonth = DateTime(
       widget.selectedDate.year,
       widget.selectedDate.month,
@@ -96,7 +96,17 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final colors = theme.colorScheme;
+    final isDark = theme.brightness == Brightness.dark;
+
+    // Warna kalender berdasarkan mode tema.
+    final calendarBackground = isDark
+        ? AppTheme.inkoraBlue
+        : AppTheme.primaryOrange.withValues(alpha: 0.12);
+
+    final textColor = isDark ? Colors.white : theme.colorScheme.onSurface;
+    final secondaryTextColor = isDark
+        ? Colors.white70
+        : theme.colorScheme.onSurfaceVariant;
 
     final firstDayOfMonth = DateTime(
       _displayedMonth.year,
@@ -109,24 +119,25 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
       _displayedMonth.month,
     );
 
-    // Kalender dimulai dari hari Senin.
     final startingOffset = firstDayOfMonth.weekday - 1;
-
     final totalCells = ((startingOffset + daysInMonth + 6) ~/ 7) * 7;
 
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: colors.surfaceContainerLow,
+        color: calendarBackground,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: colors.outlineVariant.withValues(alpha: 0.5)),
+        border: Border.all(
+          color: isDark
+              ? Colors.white.withValues(alpha: 0.15)
+              : AppTheme.primaryOrange.withValues(alpha: 0.2),
+        ),
       ),
       child: Column(
         children: [
-          _buildMonthHeader(theme, colors),
+          _buildMonthHeader(theme, textColor),
           const SizedBox(height: 20),
 
-          // Nama hari.
           Row(
             children: _weekdays.map((day) {
               return Expanded(
@@ -134,7 +145,7 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
                   child: Text(
                     day,
                     style: theme.textTheme.labelSmall?.copyWith(
-                      color: colors.onSurfaceVariant,
+                      color: secondaryTextColor,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -145,7 +156,6 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
 
           const SizedBox(height: 12),
 
-          // Grid tanggal.
           GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -181,22 +191,22 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
                 isToday: isToday,
                 isDisabled: isDisabled,
                 theme: theme,
-                colors: colors,
+                textColor: textColor,
+                isDark: isDark,
               );
             },
           ),
 
-          const SizedBox(height: 12),
+          const SizedBox(height: 16),
 
-          // Keterangan kalender.
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
                 width: 8,
                 height: 8,
-                decoration: BoxDecoration(
-                  color: colors.primary,
+                decoration: const BoxDecoration(
+                  color: AppTheme.primaryOrange,
                   shape: BoxShape.circle,
                 ),
               ),
@@ -204,7 +214,7 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
               Text(
                 'Tanggal dipilih',
                 style: theme.textTheme.labelSmall?.copyWith(
-                  color: colors.onSurfaceVariant,
+                  color: secondaryTextColor,
                 ),
               ),
               const SizedBox(width: 16),
@@ -212,7 +222,7 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
                 width: 8,
                 height: 8,
                 decoration: BoxDecoration(
-                  border: Border.all(color: colors.primary),
+                  border: Border.all(color: AppTheme.primaryOrange, width: 1.5),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -220,7 +230,7 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
               Text(
                 'Hari ini',
                 style: theme.textTheme.labelSmall?.copyWith(
-                  color: colors.onSurfaceVariant,
+                  color: secondaryTextColor,
                 ),
               ),
             ],
@@ -230,14 +240,14 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
     );
   }
 
-  Widget _buildMonthHeader(ThemeData theme, ColorScheme colors) {
+  Widget _buildMonthHeader(ThemeData theme, Color textColor) {
     final monthLabel = DateFormat('MMMM yyyy', 'id_ID').format(_displayedMonth);
 
     return Row(
       children: [
         IconButton(
           onPressed: _canGoPrevious ? () => _changeMonth(-1) : null,
-          icon: const Icon(Icons.chevron_left_rounded),
+          icon: Icon(Icons.chevron_left_rounded, color: textColor),
           tooltip: 'Bulan sebelumnya',
         ),
         Expanded(
@@ -245,13 +255,14 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
             monthLabel,
             textAlign: TextAlign.center,
             style: theme.textTheme.titleMedium?.copyWith(
+              color: textColor,
               fontWeight: FontWeight.w700,
             ),
           ),
         ),
         IconButton(
           onPressed: _canGoNext ? () => _changeMonth(1) : null,
-          icon: const Icon(Icons.chevron_right_rounded),
+          icon: Icon(Icons.chevron_right_rounded, color: textColor),
           tooltip: 'Bulan berikutnya',
         ),
       ],
@@ -264,21 +275,24 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
     required bool isToday,
     required bool isDisabled,
     required ThemeData theme,
-    required ColorScheme colors,
+    required Color textColor,
+    required bool isDark,
   }) {
-    final backgroundColor = isSelected ? colors.primary : Colors.transparent;
+    final backgroundColor = isSelected
+        ? AppTheme.primaryOrange
+        : Colors.transparent;
 
     final foregroundColor = isSelected
-        ? colors.onPrimary
+        ? Colors.white
         : isDisabled
-        ? colors.onSurface.withValues(alpha: 0.25)
-        : colors.onSurface;
+        ? textColor.withValues(alpha: 0.25)
+        : textColor;
 
     return Material(
       color: backgroundColor,
       shape: CircleBorder(
         side: isToday && !isSelected
-            ? BorderSide(color: colors.primary, width: 1.5)
+            ? const BorderSide(color: AppTheme.primaryOrange, width: 1.5)
             : BorderSide.none,
       ),
       child: InkWell(

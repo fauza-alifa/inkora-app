@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_app/providers/headlines_provider.dart';
 
 import '../../../../core/constants/news_category.dart';
+import '../../../../core/theme/app_theme.dart';
 
 /// Pilihan kategori berita berbentuk tab horizontal.
 class CategoryChips extends ConsumerWidget {
@@ -12,6 +13,10 @@ class CategoryChips extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     const categories = NewsCategory.values;
     final selected = ref.watch(selectedCategoryProvider);
+
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    final inactiveTextColor = isDark ? Colors.white : Colors.black;
 
     return SizedBox(
       height: 52,
@@ -33,7 +38,9 @@ class CategoryChips extends ConsumerWidget {
               decoration: BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
-                    color: isSelected ? Colors.orange : Colors.transparent,
+                    color: isSelected
+                        ? AppTheme.primaryOrange
+                        : Colors.transparent,
                     width: 3,
                   ),
                 ),
@@ -44,7 +51,9 @@ class CategoryChips extends ConsumerWidget {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
-                    color: isSelected ? Colors.orange : Colors.white,
+                    color: isSelected
+                        ? AppTheme.primaryOrange
+                        : inactiveTextColor,
                   ),
                 ),
               ),
