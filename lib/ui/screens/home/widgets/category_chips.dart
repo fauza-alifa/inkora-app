@@ -4,7 +4,7 @@ import 'package:news_app/providers/headlines_provider.dart';
 
 import '../../../../core/constants/news_category.dart';
 
-/// Pilihan kategori berita berbentuk chip horizontal (ConsumerWidget).
+/// Pilihan kategori berita berbentuk tab horizontal.
 class CategoryChips extends ConsumerWidget {
   const CategoryChips({super.key});
 
@@ -14,20 +14,41 @@ class CategoryChips extends ConsumerWidget {
     final selected = ref.watch(selectedCategoryProvider);
 
     return SizedBox(
-      height: 56,
+      height: 52,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         itemCount: categories.length,
-        separatorBuilder: (_, _) => const SizedBox(width: 8),
+        separatorBuilder: (_, _) => const SizedBox(width: 24),
         itemBuilder: (context, index) {
           final category = categories[index];
-          return ChoiceChip(
-            label: Text(category.label),
-            selected: category == selected,
-            showCheckmark: false,
-            onSelected: (_) =>
-                ref.read(selectedCategoryProvider.notifier).select(category),
+          final isSelected = category == selected;
+
+          return GestureDetector(
+            onTap: () {
+              ref.read(selectedCategoryProvider.notifier).select(category);
+            },
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: isSelected ? Colors.orange : Colors.transparent,
+                    width: 3,
+                  ),
+                ),
+              ),
+              child: Center(
+                child: Text(
+                  category.label,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+                    color: isSelected ? Colors.orange : Colors.white,
+                  ),
+                ),
+              ),
+            ),
           );
         },
       ),

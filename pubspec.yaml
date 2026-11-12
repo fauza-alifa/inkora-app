@@ -1,6 +1,6 @@
 name: news_app
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0+1
 
 environment:
@@ -29,6 +29,7 @@ flutter:
   assets:
     # Berisi API key. File ini di-ignore oleh git (lihat .env.example).
     - .env
+    - assets\images\inkora_logo.png
 
 # Logo aplikasi → jalankan: dart run flutter_launcher_icons
 flutter_launcher_icons:
