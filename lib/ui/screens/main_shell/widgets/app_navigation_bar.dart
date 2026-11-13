@@ -41,7 +41,7 @@ class AppNavigationBar extends ConsumerWidget {
     ];
 
     return Container(
-      height: 76,
+      height: 100,
       decoration: BoxDecoration(
         color: scheme.surfaceContainer,
         border: Border(
