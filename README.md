@@ -1,28 +1,50 @@
-# Warta News App - Starter Project
+# INKORA — Digital News Application
 
-Selamat datang di repositori Starter untuk pembuatan aplikasi **Warta**. Proyek ini digunakan sebagai _Project-Based Learning_ (PBL) bagi siswi SMK untuk mempelajari pembuatan aplikasi dengan framework Flutter.
+**Inkora is a modern digital news application that delivers the latest updates across various categories, including business, technology, science, and health. With a clean and intuitive interface, Inkora makes it easy for users to explore, read, and save news articles in one convenient platform.**
 
-Repositori ini hanya berisi kerangka awal aplikasi, yang mana logika aplikasinya (API, State Management) telah dikosongkan. 
+## ✨ Features
 
-## 🚀 Persiapan Awal
-1. Clone repositori ini.
-2. Buka proyek menggunakan VS Code atau Android Studio.
-3. Buka terminal, pastikan berada di folder proyek ini, lalu jalankan:
-   ```bash
-   flutter pub get
-   ```
-4. Ubah nama file `.env.example` menjadi `.env`.
-5. Ikuti **Modul Pembelajaran** yang telah diberikan oleh Trainer/Pengajar-mu.
+INKORA provides a range of features designed to create a convenient and enjoyable news-reading experience:
 
-## 📁 Struktur Pengerjaan
-Kamu akan diinstruksikan oleh Trainer untuk mengisi file-file berikut secara bertahap:
-- `lib/data/models/article.dart`
-- `lib/core/constants/api_constants.dart`
-- `lib/data/services/news_api_service.dart`
-- `lib/data/repositories/news_repository.dart`
-- `lib/providers/...` (Semua file di folder ini)
-- Dan menyambungkan UI dengan State Management (`Riverpod`).
+- **Latest News**
+- **News Categories**
+- **Search Articles**
+- **Article Details**
+- **Bookmark Articles**
+- **Bookmark Counter**
+- **News Archive**
+- **Date-Based News Filtering**
+- **Dark & Light Mode**
 
-Terdapat banyak komentar bertuliskan `// TODO:` di dalam kode. Ikuti panduan modul dan kerjakan TODO tersebut langkah demi langkah.
+## 🛠️ Tech Stack
 
-Semangat belajar dan Happy Coding! 🚀
+- **Framework:** Flutter
+- **Programming Language:** Dart
+- **State Management:** Riverpod
+- **API:** NewsAPI
+- **Networking:** HTTP
+- **Local Storage:** SharedPreferences
+- **Date Formatting:** Intl
+
+## 📁 Project Structure
+
+The project follows a structured organization to separate application logic, data handling, and user interface components.
+
+lib/
+├── core/
+│   ├── constants/
+│   ├── router/
+│   ├── theme/
+│   └── utils/
+├── data/
+│   ├── models/
+│   ├── repositories/
+│   └── services/
+├── providers/
+└── ui/
+    ├── screens/
+    └── widgets/
+
+## 📡 API
+
+INKORA uses [NewsAPI](https://newsapi.org/) to retrieve news articles and headlines from various sources.
