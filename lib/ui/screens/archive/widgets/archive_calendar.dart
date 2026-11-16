@@ -132,7 +132,7 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
           // Calendar header
           _buildMonthHeader(theme, colors),
 
-          SizedBox(height: 22),
+          SizedBox(height: 24),
 
           // Weekday labels
           Row(
