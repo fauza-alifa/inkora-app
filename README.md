@@ -2,7 +2,7 @@
 
 **Inkora is a modern digital news application that delivers the latest updates across various categories, including business, technology, science, and health. With a clean and intuitive interface, Inkora makes it easy for users to explore, read, and save news articles in one convenient platform.**
 
-## ✨ Features
+## Features
 
 INKORA provides a range of features designed to create a convenient and enjoyable news-reading experience:
 
@@ -16,7 +16,7 @@ INKORA provides a range of features designed to create a convenient and enjoyabl
 - **Date-Based News Filtering**
 - **Dark & Light Mode**
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Framework:** Flutter
 - **Programming Language:** Dart
@@ -26,7 +26,7 @@ INKORA provides a range of features designed to create a convenient and enjoyabl
 - **Local Storage:** SharedPreferences
 - **Date Formatting:** Intl
 
-## 📁 Project Structure
+## Project Structure
 
 The project follows a structured organization to separate application logic, data handling, and user interface components.
 
@@ -45,6 +45,6 @@ lib/
     ├── screens/
     └── widgets/
 
-## 📡 API
+## API
 
 INKORA uses [NewsAPI](https://newsapi.org/) to retrieve news articles and headlines from various sources.
