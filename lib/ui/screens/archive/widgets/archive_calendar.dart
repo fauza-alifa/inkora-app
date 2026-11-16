@@ -100,7 +100,9 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
     final colors = theme.colorScheme;
     final isDark = theme.brightness == Brightness.dark;
 
-    final calendarBackground = isDark ? AppTheme.inkoraBlue : AppTheme.primaryOrange.withValues(alpha: 0.1);
+    final calendarBackground = isDark
+        ? AppTheme.inkoraBlue
+        : AppTheme.primaryOrange.withValues(alpha: 0.1);
 
     final secondaryTextColor = colors.onSurfaceVariant;
 
@@ -119,7 +121,7 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
     final totalCells = ((startingOffset + daysInMonth + 6) ~/ 7) * 7;
 
     return Container(
-      padding: const EdgeInsets.all(30),
+      padding: EdgeInsets.all(30),
       decoration: BoxDecoration(
         color: calendarBackground,
         borderRadius: BorderRadius.circular(22),
@@ -130,7 +132,7 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
           // Calendar header
           _buildMonthHeader(theme, colors),
 
-          const SizedBox(height: 22),
+          SizedBox(height: 22),
 
           // Weekday labels
           Row(
@@ -150,14 +152,14 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
             }).toList(),
           ),
 
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
 
           // Calendar dates
           GridView.builder(
             shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
+            physics: NeverScrollableScrollPhysics(),
             itemCount: totalCells,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 7,
               mainAxisSpacing: 8,
               crossAxisSpacing: 4,
@@ -167,7 +169,7 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
               final dayNumber = index - startingOffset + 1;
 
               if (dayNumber < 1 || dayNumber > daysInMonth) {
-                return const SizedBox.shrink();
+                return SizedBox.shrink();
               }
 
               final date = DateTime(
@@ -194,7 +196,7 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
             },
           ),
 
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
 
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -206,7 +208,7 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
                 colors: colors,
               ),
 
-              const SizedBox(width: 22),
+              SizedBox(width: 22),
 
               _buildLegend(
                 color: Colors.transparent,
@@ -227,33 +229,6 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
 
     return Row(
       children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'ARSIP BERITA',
-                style: theme.textTheme.labelSmall?.copyWith(
-                  color: colors.primary,
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: 1.2,
-                ),
-              ),
-
-              const SizedBox(height: 5),
-
-              Text(
-                monthLabel,
-                style: theme.textTheme.titleLarge?.copyWith(
-                  color: colors.onSurface,
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: -0.5,
-                ),
-              ),
-            ],
-          ),
-        ),
-
         _buildMonthButton(
           icon: Icons.chevron_left_rounded,
           enabled: _canGoPrevious,
@@ -262,7 +237,19 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
           colors: colors,
         ),
 
-        const SizedBox(width: 8),
+        Spacer(),
+
+        Text(
+          monthLabel,
+          textAlign: TextAlign.center,
+          style: theme.textTheme.titleLarge?.copyWith(
+            color: colors.onSurface,
+            fontWeight: FontWeight.w800,
+            letterSpacing: -0.5,
+          ),
+        ),
+
+        Spacer(),
 
         _buildMonthButton(
           icon: Icons.chevron_right_rounded,
@@ -316,7 +303,7 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
 
     return Center(
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 180),
+        duration: Duration(milliseconds: 180),
         width: 38,
         height: 38,
         decoration: BoxDecoration(
@@ -329,7 +316,7 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
         child: Material(
           color: Colors.transparent,
           child: InkWell(
-            customBorder: const CircleBorder(),
+            customBorder: CircleBorder(),
             onTap: isDisabled ? null : () => _selectDate(date),
             child: Center(
               child: Text(
@@ -370,7 +357,7 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
           ),
         ),
 
-        const SizedBox(width: 7),
+        SizedBox(width: 7),
 
         Text(
           label,
