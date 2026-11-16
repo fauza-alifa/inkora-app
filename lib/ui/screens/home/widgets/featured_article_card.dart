@@ -7,7 +7,6 @@ import '../../../widgets/article_image.dart';
 import '../../../widgets/bookmark_button.dart';
 import '../../../widgets/source_label.dart';
 
-/// Kartu berita utama dengan tampilan editorial.
 class FeaturedArticleCard extends StatelessWidget {
   const FeaturedArticleCard({super.key, required this.article});
 
@@ -19,6 +18,7 @@ class FeaturedArticleCard extends StatelessWidget {
     final colors = theme.colorScheme;
 
     final description = article.description;
+    final author = article.author;
 
     return Material(
       color: colors.surface,
@@ -76,40 +76,71 @@ class FeaturedArticleCard extends StatelessWidget {
 
               SizedBox(height: 14),
 
-              // Publication date
               Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(
-                    Icons.access_time_rounded,
-                    size: 14,
-                    color: colors.onSurfaceVariant,
-                  ),
-                  SizedBox(width: 6),
+                  // Author and publication date
                   Expanded(
-                    child: Text(
-                      DateFormatter.relative(article.publishedAt),
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        color: colors.onSurfaceVariant,
-                        fontWeight: FontWeight.w500,
+                    child: Row(
+                      children: [
+                        if (author != null && author.trim().isNotEmpty) ...[
+                          Flexible(
+                            child: Text(
+                              author.trim(),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: theme.textTheme.bodySmall?.copyWith(
+                                color: colors.onSurfaceVariant,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+
+                          SizedBox(width: 120),
+                        ],
+
+                        Flexible(
+                          child: Text(
+                            DateFormatter.relative(article.publishedAt),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: colors.onSurfaceVariant,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(width: 12),
+
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'READ MORE',
+                        style: theme.textTheme.labelSmall?.copyWith(
+                          color: colors.primary,
+                          fontWeight: FontWeight.w800,
+                          letterSpacing: 0.8,
+                        ),
                       ),
-                    ),
-                  ),
-                  Text(
-                    'READ MORE',
-                    style: theme.textTheme.labelSmall?.copyWith(
-                      color: colors.primary,
-                      fontWeight: FontWeight.w800,
-                      letterSpacing: 0.8,
-                    ),
-                  ),
-                  SizedBox(width: 4),
-                  Icon(
-                    Icons.arrow_forward_rounded,
-                    size: 14,
-                    color: colors.primary,
+
+                      SizedBox(width: 4),
+
+                      Icon(
+                        Icons.arrow_forward_rounded,
+                        size: 14,
+                        color: colors.primary,
+                      ),
+                    ],
                   ),
                 ],
               ),
+
+              SizedBox(height: 8),
             ],
           ),
         ),

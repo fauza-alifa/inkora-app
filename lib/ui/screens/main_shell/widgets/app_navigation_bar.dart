@@ -19,7 +19,6 @@ class AppNavigationBar extends ConsumerWidget {
     final theme = Theme.of(context);
     final scheme = theme.colorScheme;
 
-    // Mengambil jumlah bookmark secara real-time.
     final bookmarkCount = ref.watch(bookmarksProvider).length;
 
     final items = [
@@ -44,13 +43,6 @@ class AppNavigationBar extends ConsumerWidget {
       height: 100,
       decoration: BoxDecoration(
         color: scheme.surfaceContainer,
-        border: Border(
-          top: BorderSide(
-            color: scheme.brightness == Brightness.dark
-                ? Color(0xFF293746)
-                : Color(0xFFE5E7EB),
-          ),
-        ),
       ),
       child: SafeArea(
         top: false,
@@ -67,7 +59,6 @@ class AppNavigationBar extends ConsumerWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Ikon navigasi.
                     Badge.count(
                       count: bookmarkCount,
                       isLabelVisible: index == 2 && bookmarkCount > 0,

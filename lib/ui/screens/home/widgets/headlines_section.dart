@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:news_app/core/theme/app_theme.dart';
 import 'package:news_app/providers/headlines_provider.dart';
 import 'package:news_app/ui/widgets/empty_state.dart';
 import 'package:news_app/ui/widgets/error_state.dart';
@@ -81,7 +82,7 @@ class HeadlinesSection extends ConsumerWidget {
 
             SliverToBoxAdapter(
               child: Padding(
-                padding: EdgeInsets.only(top: 8),
+                padding: EdgeInsets.symmetric(vertical: 8),
                 child: FeaturedArticleCard(article: articles.first),
               ),
             ),
@@ -97,7 +98,7 @@ class HeadlinesSection extends ConsumerWidget {
               itemCount: articles.length - 1,
               separatorBuilder: (_, _) => Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Divider(height: 1, color: colors.outlineVariant),
+                child: Divider(height: 1, color: AppTheme.inkoraBlue.withValues(alpha: 0.2)),
               ),
               itemBuilder: (context, index) {
                 return Padding(

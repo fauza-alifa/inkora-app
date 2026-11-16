@@ -10,7 +10,7 @@ import '../../archive/archive_screen.dart';
 class HomeAppBar extends ConsumerWidget {
   const HomeAppBar({super.key});
 
-  static const String _logoPath = 'assets\images\inkora_logo.png';
+  static const String _logoPath = 'assets/images/inkora_logo.png';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,15 +20,17 @@ class HomeAppBar extends ConsumerWidget {
     return SliverAppBar(
       floating: true,
       snap: true,
+      pinned: true,
       toolbarHeight: 76,
+      
       title: Row(
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Image.asset(
               _logoPath,
-              width: 42,
-              height: 42,
+              width: 50,
+              height: 50,
               fit: BoxFit.contain,
               errorBuilder: (context, error, stackTrace) {
                 return Container(
@@ -47,7 +49,9 @@ class HomeAppBar extends ConsumerWidget {
               },
             ),
           ),
+
           SizedBox(width: 10),
+
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,7 +63,6 @@ class HomeAppBar extends ConsumerWidget {
                     color: colors.onSurfaceVariant,
                   ),
                 ),
-                SizedBox(height: 2),
                 Text(
                   'Inkora',
                   style: theme.textTheme.headlineMedium?.copyWith(
@@ -71,6 +74,7 @@ class HomeAppBar extends ConsumerWidget {
           ),
         ],
       ),
+
       actions: [
         IconButton(
           tooltip: 'Arsip berita',
@@ -81,7 +85,9 @@ class HomeAppBar extends ConsumerWidget {
             );
           },
         ),
+
         ThemeToggleButton(),
+
         IconButton(
           tooltip: 'Cari berita',
           icon: Icon(Icons.search_rounded),
@@ -89,6 +95,7 @@ class HomeAppBar extends ConsumerWidget {
             ref.read(navigationProvider.notifier).select(1);
           },
         ),
+
         SizedBox(width: 8),
       ],
     );

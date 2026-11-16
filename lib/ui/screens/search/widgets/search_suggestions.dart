@@ -76,7 +76,7 @@ class SearchSuggestions extends ConsumerWidget {
                   fontWeight: FontWeight.w500,
                 ),
                 backgroundColor: colors.surface,
-                side: BorderSide(color: AppTheme.primaryOrange.withValues(alpha: 0.10)),
+                side: BorderSide(color: AppTheme.primaryOrange.withValues(alpha: 0.2)),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),

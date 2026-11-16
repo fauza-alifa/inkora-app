@@ -21,19 +21,20 @@ class ArchiveCalendar extends StatefulWidget {
 class _ArchiveCalendarState extends State<ArchiveCalendar> {
   late DateTime _displayedMonth;
 
-  static List<String> _weekdays = [
-    'Sen',
-    'Sel',
-    'Rab',
-    'Kam',
-    'Jum',
-    'Sab',
-    'Min',
+  static const List<String> _weekdays = [
+    'SEN',
+    'SEL',
+    'RAB',
+    'KAM',
+    'JUM',
+    'SAB',
+    'MIN',
   ];
 
   @override
   void initState() {
     super.initState();
+
     _displayedMonth = DateTime(
       widget.selectedDate.year,
       widget.selectedDate.month,
@@ -96,17 +97,12 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final colors = theme.colorScheme;
     final isDark = theme.brightness == Brightness.dark;
 
-    // Warna kalender berdasarkan mode tema.
-    final calendarBackground = isDark
-        ? AppTheme.inkoraBlue
-        : AppTheme.primaryOrange.withValues(alpha: 0.12);
+    final calendarBackground = isDark ? AppTheme.inkoraBlue : AppTheme.primaryOrange.withValues(alpha: 0.1);
 
-    final textColor = isDark ? Colors.white : theme.colorScheme.onSurface;
-    final secondaryTextColor = isDark
-        ? Colors.white70
-        : theme.colorScheme.onSurfaceVariant;
+    final secondaryTextColor = colors.onSurfaceVariant;
 
     final firstDayOfMonth = DateTime(
       _displayedMonth.year,
@@ -123,21 +119,20 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
     final totalCells = ((startingOffset + daysInMonth + 6) ~/ 7) * 7;
 
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(30),
       decoration: BoxDecoration(
         color: calendarBackground,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: isDark
-              ? Colors.white.withValues(alpha: 0.15)
-              : AppTheme.primaryOrange.withValues(alpha: 0.2),
-        ),
+        borderRadius: BorderRadius.circular(22),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildMonthHeader(theme, textColor),
-          SizedBox(height: 20),
+          // Calendar header
+          _buildMonthHeader(theme, colors),
 
+          const SizedBox(height: 22),
+
+          // Weekday labels
           Row(
             children: _weekdays.map((day) {
               return Expanded(
@@ -146,7 +141,8 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
                     day,
                     style: theme.textTheme.labelSmall?.copyWith(
                       color: secondaryTextColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 0.5,
                     ),
                   ),
                 ),
@@ -154,22 +150,24 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
             }).toList(),
           ),
 
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
 
+          // Calendar dates
           GridView.builder(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: totalCells,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 7,
               mainAxisSpacing: 8,
               crossAxisSpacing: 4,
+              childAspectRatio: 1,
             ),
             itemBuilder: (context, index) {
               final dayNumber = index - startingOffset + 1;
 
               if (dayNumber < 1 || dayNumber > daysInMonth) {
-                return SizedBox.shrink();
+                return const SizedBox.shrink();
               }
 
               final date = DateTime(
@@ -191,47 +189,31 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
                 isToday: isToday,
                 isDisabled: isDisabled,
                 theme: theme,
-                textColor: textColor,
-                isDark: isDark,
+                colors: colors,
               );
             },
           ),
 
-          SizedBox(height: 16),
+          const SizedBox(height: 20),
 
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                width: 8,
-                height: 8,
-                decoration: BoxDecoration(
-                  color: AppTheme.primaryOrange,
-                  shape: BoxShape.circle,
-                ),
+              _buildLegend(
+                color: AppTheme.primaryOrange,
+                label: 'Dipilih',
+                theme: theme,
+                colors: colors,
               ),
-              SizedBox(width: 6),
-              Text(
-                'Tanggal dipilih',
-                style: theme.textTheme.labelSmall?.copyWith(
-                  color: secondaryTextColor,
-                ),
-              ),
-              SizedBox(width: 16),
-              Container(
-                width: 8,
-                height: 8,
-                decoration: BoxDecoration(
-                  border: Border.all(color: AppTheme.primaryOrange, width: 1.5),
-                  shape: BoxShape.circle,
-                ),
-              ),
-              SizedBox(width: 6),
-              Text(
-                'Hari ini',
-                style: theme.textTheme.labelSmall?.copyWith(
-                  color: secondaryTextColor,
-                ),
+
+              const SizedBox(width: 22),
+
+              _buildLegend(
+                color: Colors.transparent,
+                label: 'Hari ini',
+                theme: theme,
+                colors: colors,
+                outlined: true,
               ),
             ],
           ),
@@ -240,32 +222,81 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
     );
   }
 
-  Widget _buildMonthHeader(ThemeData theme, Color textColor) {
+  Widget _buildMonthHeader(ThemeData theme, ColorScheme colors) {
     final monthLabel = DateFormat('MMMM yyyy', 'id_ID').format(_displayedMonth);
 
     return Row(
       children: [
-        IconButton(
-          onPressed: _canGoPrevious ? () => _changeMonth(-1) : null,
-          icon: Icon(Icons.chevron_left_rounded, color: textColor),
-          tooltip: 'Bulan sebelumnya',
-        ),
         Expanded(
-          child: Text(
-            monthLabel,
-            textAlign: TextAlign.center,
-            style: theme.textTheme.titleMedium?.copyWith(
-              color: textColor,
-              fontWeight: FontWeight.w700,
-            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'ARSIP BERITA',
+                style: theme.textTheme.labelSmall?.copyWith(
+                  color: colors.primary,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 1.2,
+                ),
+              ),
+
+              const SizedBox(height: 5),
+
+              Text(
+                monthLabel,
+                style: theme.textTheme.titleLarge?.copyWith(
+                  color: colors.onSurface,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: -0.5,
+                ),
+              ),
+            ],
           ),
         ),
-        IconButton(
-          onPressed: _canGoNext ? () => _changeMonth(1) : null,
-          icon: Icon(Icons.chevron_right_rounded, color: textColor),
+
+        _buildMonthButton(
+          icon: Icons.chevron_left_rounded,
+          enabled: _canGoPrevious,
+          tooltip: 'Bulan sebelumnya',
+          onPressed: () => _changeMonth(-1),
+          colors: colors,
+        ),
+
+        const SizedBox(width: 8),
+
+        _buildMonthButton(
+          icon: Icons.chevron_right_rounded,
+          enabled: _canGoNext,
           tooltip: 'Bulan berikutnya',
+          onPressed: () => _changeMonth(1),
+          colors: colors,
         ),
       ],
+    );
+  }
+
+  Widget _buildMonthButton({
+    required IconData icon,
+    required bool enabled,
+    required String tooltip,
+    required VoidCallback onPressed,
+    required ColorScheme colors,
+  }) {
+    return Tooltip(
+      message: tooltip,
+      child: IconButton(
+        onPressed: enabled ? onPressed : null,
+        tooltip: tooltip,
+        icon: Icon(
+          icon,
+          size: 26,
+          color: enabled
+              ? colors.onSurface
+              : colors.onSurface.withValues(alpha: 0.25),
+        ),
+        splashRadius: 20,
+        visualDensity: VisualDensity.compact,
+      ),
     );
   }
 
@@ -275,41 +306,80 @@ class _ArchiveCalendarState extends State<ArchiveCalendar> {
     required bool isToday,
     required bool isDisabled,
     required ThemeData theme,
-    required Color textColor,
-    required bool isDark,
+    required ColorScheme colors,
   }) {
-    final backgroundColor = isSelected
-        ? AppTheme.primaryOrange
-        : Colors.transparent;
-
     final foregroundColor = isSelected
         ? Colors.white
         : isDisabled
-        ? textColor.withValues(alpha: 0.25)
-        : textColor;
+        ? colors.onSurface.withValues(alpha: 0.25)
+        : colors.onSurface;
 
-    return Material(
-      color: backgroundColor,
-      shape: CircleBorder(
-        side: isToday && !isSelected
-            ? BorderSide(color: AppTheme.primaryOrange, width: 1.5)
-            : BorderSide.none,
-      ),
-      child: InkWell(
-        customBorder: CircleBorder(),
-        onTap: isDisabled ? null : () => _selectDate(date),
-        child: Center(
-          child: Text(
-            '${date.day}',
-            style: theme.textTheme.bodyMedium?.copyWith(
-              color: foregroundColor,
-              fontWeight: isSelected || isToday
-                  ? FontWeight.w700
-                  : FontWeight.w400,
+    return Center(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 180),
+        width: 38,
+        height: 38,
+        decoration: BoxDecoration(
+          color: isSelected ? AppTheme.primaryOrange : Colors.transparent,
+          shape: BoxShape.circle,
+          border: isToday && !isSelected
+              ? Border.all(color: AppTheme.primaryOrange, width: 1.5)
+              : null,
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            customBorder: const CircleBorder(),
+            onTap: isDisabled ? null : () => _selectDate(date),
+            child: Center(
+              child: Text(
+                '${date.day}',
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: foregroundColor,
+                  fontWeight: isSelected || isToday
+                      ? FontWeight.w800
+                      : FontWeight.w500,
+                ),
+              ),
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildLegend({
+    required Color color,
+    required String label,
+    required ThemeData theme,
+    required ColorScheme colors,
+    bool outlined = false,
+  }) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 9,
+          height: 9,
+          decoration: BoxDecoration(
+            color: color,
+            shape: BoxShape.circle,
+            border: outlined
+                ? Border.all(color: AppTheme.primaryOrange, width: 1.5)
+                : null,
+          ),
+        ),
+
+        const SizedBox(width: 7),
+
+        Text(
+          label,
+          style: theme.textTheme.labelSmall?.copyWith(
+            color: colors.onSurfaceVariant,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ],
     );
   }
 }

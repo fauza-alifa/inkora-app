@@ -98,7 +98,6 @@ class AppTheme {
         ),
       ),
 
-      // Card (Menggunakan warna solid untuk border tanpa opacity)
       cardTheme: CardThemeData(
         color: scheme.surfaceContainer,
         surfaceTintColor: Colors.transparent,
